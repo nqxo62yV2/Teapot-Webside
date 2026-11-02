@@ -28,7 +28,7 @@ const SCRIPT = `loadstring(game:HttpGet("https://example.com/script.lua"))()`;
 const DISCORD = "https://discord.gg/m6ev7Ch4SQ";
 
 const btn =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border bg-secondary px-4 text-sm font-medium text-secondary-foreground transition-colors hover:border-ring hover:bg-accent";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border bg-secondary px-4 text-sm font-medium text-secondary-foreground select-none transition-all duration-100 ease-out translate-y-0 shadow-[0_4px_0_0_oklch(0.18_0_0)] hover:-translate-y-[2px] hover:shadow-[0_6px_0_0_oklch(0.18_0_0)] hover:border-ring hover:bg-accent active:translate-y-[3px] active:shadow-[0_1px_0_0_oklch(0.18_0_0)]";
 
 function DiscordIcon({ className = "" }: { className?: string }) {
   return (

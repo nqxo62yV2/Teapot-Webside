@@ -5,17 +5,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-100 ease-out select-none translate-y-0 active:translate-y-[3px] active:shadow-none",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        default:
+          "bg-primary text-primary-foreground shadow-[0_4px_0_0_oklch(0.6_0_0)] hover:shadow-[0_6px_0_0_oklch(0.6_0_0)] hover:-translate-y-[2px] active:shadow-[0_1px_0_0_oklch(0.6_0_0)]",
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-[0_4px_0_0_oklch(0.4_0.2_25)] hover:shadow-[0_6px_0_0_oklch(0.4_0.2_25)] hover:-translate-y-[2px] active:shadow-[0_1px_0_0_oklch(0.4_0.2_25)]",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border border-input bg-background shadow-[0_4px_0_0_oklch(0.34_0_0)] hover:shadow-[0_6px_0_0_oklch(0.34_0_0)] hover:-translate-y-[2px] hover:bg-accent hover:text-accent-foreground active:shadow-[0_1px_0_0_oklch(0.34_0_0)]",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-[0_4px_0_0_oklch(0.18_0_0)] hover:shadow-[0_6px_0_0_oklch(0.18_0_0)] hover:-translate-y-[2px] active:shadow-[0_1px_0_0_oklch(0.18_0_0)]",
+        ghost: "hover:bg-accent hover:text-accent-foreground shadow-none",
+        link: "text-primary underline-offset-4 hover:underline shadow-none",
       },
       size: {
         default: "h-9 px-4 py-2",
