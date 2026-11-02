@@ -229,8 +229,15 @@
 /* ============= 3-D Buttons ============= */
 /*
  * Physical-key style: one clean bottom-edge shadow = the "plinth".
- * Hover lifts slightly. Click slams down into the plinth.
+ * Hover lifts slightly. Click plays a keyframe press-and-release animation.
  */
+
+@keyframes btn-press {
+  0%   { transform: translateY(0);   box-shadow: var(--btn-shadow-rest); }
+  30%  { transform: translateY(4px); box-shadow: var(--btn-shadow-pressed); }
+  65%  { transform: translateY(-2px); box-shadow: var(--btn-shadow-hover); }
+  100% { transform: translateY(0);   box-shadow: var(--btn-shadow-rest); }
+}
 
 .btn-3d {
   position: relative;
@@ -241,138 +248,87 @@
   will-change: transform, box-shadow;
 }
 
+.btn-3d.pressed {
+  animation: btn-press 320ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  pointer-events: none;
+}
+
 /* ── Secondary (main buttons on homepage) ── */
 .btn-3d--secondary {
+  --btn-shadow-rest:    inset 0 1px 0 oklch(0.45 0 0 / 0.4), 0 3px 0 oklch(0.10 0 0), 0 5px 10px oklch(0 0 0 / 0.35);
+  --btn-shadow-hover:   inset 0 1px 0 oklch(0.48 0 0 / 0.4), 0 5px 0 oklch(0.10 0 0), 0 8px 16px oklch(0 0 0 / 0.45);
+  --btn-shadow-pressed: inset 0 2px 3px oklch(0 0 0 / 0.3),  0 0px 0 oklch(0.10 0 0), 0 1px 3px oklch(0 0 0 / 0.2);
   background: linear-gradient(180deg, oklch(0.30 0 0) 0%, oklch(0.23 0 0) 100%);
   color: oklch(0.92 0 0);
   border: 1px solid oklch(0.40 0 0);
   border-bottom-color: oklch(0.14 0 0);
-  box-shadow:
-    inset 0 1px 0 oklch(0.45 0 0 / 0.4),
-    0 3px 0 oklch(0.10 0 0),
-    0 5px 10px oklch(0 0 0 / 0.35);
+  box-shadow: var(--btn-shadow-rest);
 }
 
-.btn-3d--secondary:hover {
+.btn-3d--secondary:hover:not(.pressed) {
   transform: translateY(-2px);
   filter: brightness(1.12);
-  box-shadow:
-    inset 0 1px 0 oklch(0.48 0 0 / 0.4),
-    0 5px 0 oklch(0.10 0 0),
-    0 8px 16px oklch(0 0 0 / 0.45);
-}
-
-.btn-3d--secondary:active {
-  transform: translateY(3px);
-  filter: brightness(0.9);
-  transition-duration: 60ms;
-  box-shadow:
-    inset 0 2px 3px oklch(0 0 0 / 0.3),
-    0 0 0 oklch(0.10 0 0),
-    0 1px 3px oklch(0 0 0 / 0.2);
+  box-shadow: var(--btn-shadow-hover);
 }
 
 /* ── Default (light/white variant) ── */
 .btn-3d--default {
+  --btn-shadow-rest:    inset 0 1px 0 oklch(1 0 0 / 0.7),   0 3px 0 oklch(0.50 0 0), 0 5px 10px oklch(0 0 0 / 0.25);
+  --btn-shadow-hover:   inset 0 1px 0 oklch(1 0 0 / 0.8),   0 5px 0 oklch(0.50 0 0), 0 8px 16px oklch(0 0 0 / 0.3);
+  --btn-shadow-pressed: inset 0 2px 3px oklch(0 0 0 / 0.15), 0 0px 0 oklch(0.50 0 0), 0 1px 3px oklch(0 0 0 / 0.15);
   background: linear-gradient(180deg, oklch(0.97 0 0) 0%, oklch(0.86 0 0) 100%);
   color: oklch(0.15 0 0);
   border: 1px solid oklch(0.70 0 0);
   border-bottom-color: oklch(0.48 0 0);
-  box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 0.7),
-    0 3px 0 oklch(0.50 0 0),
-    0 5px 10px oklch(0 0 0 / 0.25);
+  box-shadow: var(--btn-shadow-rest);
 }
 
-.btn-3d--default:hover {
+.btn-3d--default:hover:not(.pressed) {
   transform: translateY(-2px);
   filter: brightness(1.06);
-  box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 0.8),
-    0 5px 0 oklch(0.50 0 0),
-    0 8px 16px oklch(0 0 0 / 0.3);
-}
-
-.btn-3d--default:active {
-  transform: translateY(3px);
-  filter: brightness(0.92);
-  transition-duration: 60ms;
-  box-shadow:
-    inset 0 2px 3px oklch(0 0 0 / 0.15),
-    0 0 0 oklch(0.50 0 0),
-    0 1px 3px oklch(0 0 0 / 0.15);
+  box-shadow: var(--btn-shadow-hover);
 }
 
 /* ── Destructive ── */
 .btn-3d--destructive {
+  --btn-shadow-rest:    inset 0 1px 0 oklch(0.74 0.15 25 / 0.4), 0 3px 0 oklch(0.26 0.2 25), 0 5px 10px oklch(0 0 0 / 0.3);
+  --btn-shadow-hover:   inset 0 1px 0 oklch(0.78 0.15 25 / 0.4), 0 5px 0 oklch(0.26 0.2 25), 0 8px 16px oklch(0 0 0 / 0.35);
+  --btn-shadow-pressed: inset 0 2px 3px oklch(0 0 0 / 0.25),      0 0px 0 oklch(0.26 0.2 25), 0 1px 3px oklch(0 0 0 / 0.2);
   background: linear-gradient(180deg, oklch(0.63 0.22 25) 0%, oklch(0.50 0.22 25) 100%);
   color: oklch(0.98 0 0);
   border: 1px solid oklch(0.56 0.2 25);
   border-bottom-color: oklch(0.28 0.2 25);
-  box-shadow:
-    inset 0 1px 0 oklch(0.74 0.15 25 / 0.4),
-    0 3px 0 oklch(0.26 0.2 25),
-    0 5px 10px oklch(0 0 0 / 0.3);
+  box-shadow: var(--btn-shadow-rest);
 }
 
-.btn-3d--destructive:hover {
+.btn-3d--destructive:hover:not(.pressed) {
   transform: translateY(-2px);
   filter: brightness(1.1);
-  box-shadow:
-    inset 0 1px 0 oklch(0.78 0.15 25 / 0.4),
-    0 5px 0 oklch(0.26 0.2 25),
-    0 8px 16px oklch(0 0 0 / 0.35);
-}
-
-.btn-3d--destructive:active {
-  transform: translateY(3px);
-  filter: brightness(0.88);
-  transition-duration: 60ms;
-  box-shadow:
-    inset 0 2px 3px oklch(0 0 0 / 0.25),
-    0 0 0 oklch(0.26 0.2 25),
-    0 1px 3px oklch(0 0 0 / 0.2);
+  box-shadow: var(--btn-shadow-hover);
 }
 
 /* ── Outline ── */
 .btn-3d--outline {
+  --btn-shadow-rest:    inset 0 1px 0 oklch(0.40 0 0 / 0.35), 0 3px 0 oklch(0.08 0 0), 0 5px 10px oklch(0 0 0 / 0.35);
+  --btn-shadow-hover:   inset 0 1px 0 oklch(0.44 0 0 / 0.35), 0 5px 0 oklch(0.08 0 0), 0 8px 16px oklch(0 0 0 / 0.45);
+  --btn-shadow-pressed: inset 0 2px 3px oklch(0 0 0 / 0.3),    0 0px 0 oklch(0.08 0 0), 0 1px 3px oklch(0 0 0 / 0.2);
   background: linear-gradient(180deg, oklch(0.26 0 0) 0%, oklch(0.20 0 0) 100%);
   color: oklch(0.92 0 0);
   border: 1px solid oklch(0.42 0 0);
   border-bottom-color: oklch(0.12 0 0);
-  box-shadow:
-    inset 0 1px 0 oklch(0.40 0 0 / 0.35),
-    0 3px 0 oklch(0.08 0 0),
-    0 5px 10px oklch(0 0 0 / 0.35);
+  box-shadow: var(--btn-shadow-rest);
 }
 
-.btn-3d--outline:hover {
+.btn-3d--outline:hover:not(.pressed) {
   transform: translateY(-2px);
   filter: brightness(1.12);
-  box-shadow:
-    inset 0 1px 0 oklch(0.44 0 0 / 0.35),
-    0 5px 0 oklch(0.08 0 0),
-    0 8px 16px oklch(0 0 0 / 0.45);
-}
-
-.btn-3d--outline:active {
-  transform: translateY(3px);
-  filter: brightness(0.88);
-  transition-duration: 60ms;
-  box-shadow:
-    inset 0 2px 3px oklch(0 0 0 / 0.3),
-    0 0 0 oklch(0.08 0 0),
-    0 1px 3px oklch(0 0 0 / 0.2);
+  box-shadow: var(--btn-shadow-hover);
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .btn-3d {
-    transform: none !important;
-    transition: filter 80ms;
-    box-shadow: none !important;
-  }
-  .btn-3d:active { filter: brightness(0.85); }
+  .btn-3d { transition: filter 80ms; }
+  .btn-3d.pressed { animation: none; filter: brightness(0.85); }
 }
 
 /* ============= Wordmark hover wave ============= */

@@ -30,6 +30,14 @@ const DISCORD = "https://discord.gg/m6ev7Ch4SQ";
 const btn =
   "btn-3d btn-3d--secondary inline-flex h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold text-secondary-foreground select-none";
 
+function pressEffect(e: React.MouseEvent<HTMLElement>) {
+  const el = e.currentTarget;
+  el.classList.remove("pressed");
+  void el.offsetWidth; // reflow to restart animation
+  el.classList.add("pressed");
+  el.addEventListener("animationend", () => el.classList.remove("pressed"), { once: true });
+}
+
 function DiscordIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={`size-5 ${className}`} aria-hidden="true">
@@ -108,7 +116,7 @@ function Index() {
           <div className="flex w-full flex-col gap-3">
             <button
               type="button"
-              onClick={copy}
+              onClick={(e) => { pressEffect(e); copy(); }}
               className={`${btn} rise-in`}
               style={{ animationDelay: "880ms" }}
             >
@@ -118,6 +126,7 @@ function Index() {
             <div className="grid grid-cols-3 gap-3">
               <Link
                 to="/login"
+                onClick={pressEffect}
                 className={`${btn} rise-in`}
                 style={{ animationDelay: "980ms" }}
               >
@@ -127,6 +136,7 @@ function Index() {
                 href={DISCORD}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={pressEffect}
                 className={`${btn} rise-in`}
                 style={{ animationDelay: "1060ms" }}
               >
@@ -136,6 +146,7 @@ function Index() {
                 href={DISCORD}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={pressEffect}
                 className={`${btn} rise-in`}
                 style={{ animationDelay: "1140ms" }}
               >
